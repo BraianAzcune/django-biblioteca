@@ -37,9 +37,9 @@ def editarAutor(request, id):
             autor_form = AutorForm(request.POST, instance=autor)
             if autor_form.is_valid():
                 autor_form.save()
-            return redirect("index")
-    except ObjectDoesNotExist as e:
-        error = e
+            return redirect("libro:listar_autor")
+    except ObjectDoesNotExist as err:
+        error = err
     return render(
         request, "libro/crear_autor.html", {"autor_form": autor_form, "error": error}
     )
