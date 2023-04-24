@@ -17,12 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
-from apps.libro.views import home
+from apps.libro.views import Inicio
 
 
 urlpatterns = [
     path("", lambda request: redirect("home/", permanent=True), name="default-page"),
     path("admin/", admin.site.urls),
     path("libro/", include(("apps.libro.urls", "libro"))),
-    path("home/", home, name="index"),
+    path("home/", Inicio.as_view(), name="index"),
 ]

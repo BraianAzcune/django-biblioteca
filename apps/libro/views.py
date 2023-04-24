@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.generic import TemplateView, ListView
 from .forms import AutorForm
 from .models import Autor
 
 
-# Create your views here.
-def home(request):
-    return render(request, "index.html")
+class Inicio(TemplateView):
+    template_name = "index.html"
 
 
 def crearAutor(request):
@@ -20,9 +20,10 @@ def crearAutor(request):
     return render(request, "libro/crear_autor.html", {"autor_form": autor_form})
 
 
-def listarAutor(request):
-    autores = Autor.objects.filter(estado=True)
-    return render(request, "libro/listar_autor.html", {"autores": autores})
+class ListadoAutor(ListView):
+    template_name = "libro/listar_autor.html"
+    context_object_name = "autores"
+    queryset = Autor.objects.filter(estado=True)
 
 
 def editarAutor(request, id):
