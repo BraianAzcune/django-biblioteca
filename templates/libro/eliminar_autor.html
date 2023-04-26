@@ -6,8 +6,9 @@
 <form method="POST">
   {% csrf_token %}
   <h2>¿Desea elminar el registro {{ autor.nombre }}?</h2>
-    <button type = "submit">Eliminar</button>
-    <a href="{% url 'libro:listar_autor' %}">Cancelar</a>
+    <hr>
+    <button class="btn btn-danger" type = "submit">Eliminar</button>
+    <a  class="btn btn-outline-secondary" type="button" href="{% url 'libro:listar_autor' %}">Cancelar</a>
 </form>
 
 {% endblock body %}

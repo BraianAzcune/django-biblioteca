@@ -1,7 +1,13 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, UpdateView
+from django.views.generic import (
+    TemplateView,
+    ListView,
+    UpdateView,
+    CreateView,
+    DeleteView,
+)
 from .forms import AutorForm
 from .models import Autor
 
@@ -10,15 +16,11 @@ class Inicio(TemplateView):
     template_name = "index.html"
 
 
-def crearAutor(request):
-    if request.method == "POST":
-        autor_form = AutorForm(request.POST)
-        if autor_form.is_valid():
-            autor_form.save()
-            return redirect("index")
-    else:
-        autor_form = AutorForm()
-    return render(request, "libro/crear_autor.html", {"autor_form": autor_form})
+class CrearAutor(CreateView):
+    model = Autor
+    form_class = AutorForm
+    template_name = "libro/crear_autor.html"
+    success_url = reverse_lazy("libro:listar_autor")
 
 
 class ListadoAutor(ListView):
@@ -32,30 +34,12 @@ class ActualizarAutor(UpdateView):
     template_name = "libro/crear_autor.html"
     form_class = AutorForm
     success_url = reverse_lazy("libro:listar_autor")
-    # context_object_name = "autor_form"
 
 
-# def editarAutor(request, id):
-#     autor_form = None
-#     error = None
-#     try:
-#         autor = Autor.objects.get(id=id)
-#         if request.method == "GET":
-#             autor_form = AutorForm(instance=autor)
-#         else:
-#             autor_form = AutorForm(request.POST, instance=autor)
-#             if autor_form.is_valid():
-#                 autor_form.save()
-#             return redirect("libro:listar_autor")
-#     except ObjectDoesNotExist as err:
-#         error = err
-#     return render(
-#         request, "libro/crear_autor.html", {"autor_form": autor_form, "error": error}
-#     )
+class EliminarAutor(DeleteView):
+    model = Autor
+    template_name = "libro/eliminar_autor.html"
 
-
-def eliminarAutor(request, id):
-    autor = Autor.objects.get(id=id)
-    autor.estado = False
-    autor.save()
-    return redirect("libro:listar_autor")
+    def post(self, request, pk):
+        Autor.objects.filter(id=pk).update(estado=False)
+        return redirect("libro:listar_autor")
