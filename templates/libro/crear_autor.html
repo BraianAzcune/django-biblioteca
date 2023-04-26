@@ -15,28 +15,29 @@
           </div>
           <div class="card-body card-block">
               <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+                
                   <div class="row form-group">
-                      <div class="col col-md-3"><label for="{{autor_form.nombre.id_for_label}}" class=" form-control-label">{{autor_form.nombre.label}}</label></div>
+                      <div class="col col-md-3"><label for="{{form.nombre.id_for_label}}" class=" form-control-label">{{form.nombre.label}}</label></div>
                       <div class="col-12 col-md-9">
-                        {{autor_form.nombre}}
+                        {{form.nombre}}
                     </div>
                   </div>
                   <div class="row form-group">
-                      <div class="col col-md-3"><label for="{{autor_form.apellidos.id_for_label}}" class=" form-control-label">{{autor_form.apellidos.label}}</label></div>
+                      <div class="col col-md-3"><label for="{{form.apellidos.id_for_label}}" class=" form-control-label">{{form.apellidos.label}}</label></div>
                       <div class="col-12 col-md-9">
-                        {{autor_form.apellidos}}
+                        {{form.apellidos}}
                     </div>
                   </div>
                   <div class="row form-group">
-                      <div class="col col-md-3"><label for="{{autor_form.nacionalidad.id_for_label}}" class=" form-control-label">{{autor_form.nacionalidad.label}}</label></div>
+                      <div class="col col-md-3"><label for="{{form.nacionalidad.id_for_label}}" class=" form-control-label">{{form.nacionalidad.label}}</label></div>
                       <div class="col-12 col-md-9">
-                        {{autor_form.nacionalidad}}
+                        {{form.nacionalidad}}
                     </div>
                   </div>
                   <div class="row form-group">
-                      <div class="col col-md-3"><label for="{{autor_form.descripcion.id_for_label}}" class=" form-control-label">{{autor_form.descripcion.label}}</label></div>
+                      <div class="col col-md-3"><label for="{{form.descripcion.id_for_label}}" class=" form-control-label">{{form.descripcion.label}}</label></div>
                       <div class="col-12 col-md-9">
-                        {{autor_form.descripcion}}
+                        {{form.descripcion}}
                     </div>
                   </div>
                   <div class="text-center">
@@ -44,6 +45,7 @@
                       <button type="reset" class="btn btn-danger">Cancelar</button>
                   </div>
               </form>
+              
           </div>
       </div>
   {% endif %}
