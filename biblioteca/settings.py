@@ -50,6 +50,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_require_login.middleware.LoginRequiredMiddleware",
 ]
 
 ROOT_URLCONF = "biblioteca.urls"
@@ -125,4 +126,8 @@ STATICFILES_DIRS = (BASE_DIR, "static")
 
 
 # SISTEMA LOGEO
+
 LOGIN_REDIRECT_URL = reverse_lazy("index")
+LOGIN_URL = "login"
+LOGOUT_REDIRECT_URL = "logout"
+REQUIRE_LOGIN_PUBLIC_NAMED_URLS = (LOGIN_URL, LOGOUT_REDIRECT_URL)
