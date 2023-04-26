@@ -15,6 +15,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from django.contrib.auth.views import logout_then_login, LoginView
 from django.urls import path, include
 from django.shortcuts import redirect
 from apps.libro.views import Inicio
@@ -25,4 +26,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("libro/", include(("apps.libro.urls", "libro"))),
     path("home/", Inicio.as_view(), name="index"),
+    # path("test", lambda request: render(request, "login.html")),
+    path("login/", LoginView.as_view(template_name="login.html"), name="login"),
+    path("logout/", logout_then_login, {"login_url": "login"}, name="logout"),
 ]
