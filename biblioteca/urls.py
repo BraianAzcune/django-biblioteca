@@ -19,7 +19,7 @@ from django.contrib.auth.views import logout_then_login, LoginView
 from django.urls import path, include
 from django.shortcuts import redirect
 from apps.libro.views import Inicio
-
+from apps.usuario.views import Login
 
 urlpatterns = [
     path("", lambda request: redirect("home/", permanent=True), name="default-page"),
@@ -27,6 +27,7 @@ urlpatterns = [
     path("libro/", include(("apps.libro.urls", "libro"))),
     path("home/", Inicio.as_view(), name="index"),
     # path("test", lambda request: render(request, "login.html")),
-    path("login/", LoginView.as_view(template_name="login.html"), name="login"),
+    # path("login/", LoginView.as_view(template_name="login.html"), name="login"),
+    path("login/", Login.as_view(), name="login"),
     path("logout/", logout_then_login, {"login_url": "login"}, name="logout"),
 ]

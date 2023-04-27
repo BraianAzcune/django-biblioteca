@@ -37,17 +37,35 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="username">Nombre de usuario</label>
-                        <input id="username" type="text" class="form-control"
-                            name="username">
+                        <!-- <input id="username" type="text" class="form-control"
+                            name="username"> -->
+                        {{form.username}}
                     </div>
                     <div class="form-group">
                         <label for="password">Contraseña</label>
-                        <input id="password" type="password"
-                            class="form-control" name="password">
+                        <!-- <input id="password" type="password"
+                            class="form-control" name="password"> -->
+                        {{form.password}}
                     </div>
                     <button type="submit" class="btn btn-success ">Iniciar
                         Sesion</button>
+                    {% if form.errors %}
+                    <div class="mt-2 alert alert-danger" role="alert">
+                        <ul style="list-style: none;">
+                            {% for error in form.non_field_errors %}
+                            <li>{{error}}</li>
+                            {% endfor%}
+                        </ul>
+                    </div>
+                    {% endif %}
                 </form>
+                <!-- aca funciona perfecto, es su version minima necesaria -->
+                <!-- <form method="post">
+                    {% csrf_token %}
+                    {{form}}
+                    <button type="submit" class="btn btn-success ">Iniciar
+                        Sesion</button>
+                </form> -->
             </div>
         </div>
 
