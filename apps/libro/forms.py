@@ -1,5 +1,5 @@
 from django import forms
-from .models import Autor
+from .models import Autor, Libro
 
 
 class AutorForm(forms.ModelForm):
@@ -19,5 +19,16 @@ class AutorForm(forms.ModelForm):
         no se deberia hacer esto aca, pero bueno.
         """
         super(AutorForm, self).__init__(*a, **k)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs["class"] = "form-control"
+
+
+class LibroForm(forms.ModelForm):
+    class Meta:
+        model = Libro
+        fields = ["titulo", "fecha_publicacion", "autor_id"]
+
+    def __init__(self, *a, **k):
+        super(LibroForm, self).__init__(*a, **k)
         for visible in self.visible_fields():
             visible.field.widget.attrs["class"] = "form-control"
